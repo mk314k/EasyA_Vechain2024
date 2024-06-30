@@ -1,0 +1,44 @@
+.product-container {
+    justify-content: space-evenly;
+  }
+  .product {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: min(300px, 70vw);
+      height: max(35vh, 450px);
+      background-color: #88888845;
+    }
+    
+    .card-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .product-img{
+      width: min(250px, 50vw);
+      height: max(15vh, 200px);
+      z-index: 2;
+    }
+    
+    .card-description {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+    
+    .card-topics {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    
+    .card-topic {
+      background-color: #007bff60;
+      color: #fff;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }

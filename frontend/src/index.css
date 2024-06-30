@@ -18,10 +18,7 @@
     width: 100vw;
   }
   header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4vh;
+    height: 6vh;
     width: 100vw;
     z-index: 2;
   }
