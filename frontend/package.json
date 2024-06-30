@@ -21,6 +21,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.24.0",
+        "statebinderk": "^0.0.2",
         "vite": "^5.0.12"
     },
     "devDependencies": {

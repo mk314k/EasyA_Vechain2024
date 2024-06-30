@@ -32,7 +32,7 @@
     position: fixed;
     top: 1vh;
     right: 2vw;
-    /* min-width:max-content; */
+    min-width:max-content;
     /* max-height: 4vh; */
     width: min(300px, 25vw);
     background: #85858538;
@@ -230,4 +230,58 @@
 .landing-footer {
     margin-top: 40px;
     color: #666;
+}
+
+
+
+
+/* Overlay */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-page {
+    background: rgb(46, 202, 93);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    max-width: 500px;
+    width: 100%;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-total {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.proceed-button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.proceed-button:hover {
+    background-color: #218838;
 }

@@ -1,14 +1,43 @@
 import React, { useState } from 'react';
 import './card.css';
 
-export const cart = {};
+export class Cart {
+    static items = {};
+
+    static addItem(id, quantity) {
+        if (Cart.items[id]) {
+            Cart.items[id] += quantity;
+        } else {
+            Cart.items[id] = quantity;
+        }
+    }
+
+    static removeItem(id) {
+        delete Cart.items[id];
+    }
+
+    static clearCart() {
+        Cart.items = {};
+    }
+
+    static getItems() {
+        return Cart.items;
+    }
+
+    static getTotalPrice(products) {
+        return Object.entries(Cart.items).reduce((total, [id, quantity]) => {
+            return total + (products[id].price * quantity);
+        }, 0);
+    }
+}
 
 export const products = {
     '0x1': {
         class: 'onion',
-        vendor: 1,
+        farm: 1,
         quant: 10,
         unit: 'kg',
+        price: 1.5,
         travel_history: {
             '06/05/2024': {
                 from: 'Chicago',
@@ -22,9 +51,10 @@ export const products = {
     },
     '0x2': {
         class: 'tomato',
-        vendor: 2,
+        farm: 2,
         quant: 5,
         unit: 'kg',
+        price: 2.0,
         travel_history: {
             '06/02/2024': {
                 from: 'Los Angeles',
@@ -38,9 +68,10 @@ export const products = {
     },
     '0x3': {
         class: 'potato',
-        vendor: 3,
+        farm: 3,
         quant: 20,
         unit: 'kg',
+        price: 0.8,
         travel_history: {
             '06/03/2024': {
                 from: 'Denver',
@@ -54,9 +85,10 @@ export const products = {
     },
     '0x4': {
         class: 'carrot',
-        vendor: 4,
+        farm: 4,
         quant: 8,
         unit: 'kg',
+        price: 1.2,
         travel_history: {
             '06/04/2024': {
                 from: 'Seattle',
@@ -70,9 +102,10 @@ export const products = {
     },
     '0x5': {
         class: 'broccoli',
-        vendor: 1,
+        farm: 1,
         quant: 15,
         unit: 'kg',
+        price: 2.5,
         travel_history: {
             '06/01/2024': {
                 from: 'Miami',
@@ -86,9 +119,10 @@ export const products = {
     },
     '0x6': {
         class: 'cabbage',
-        vendor: 2,
+        farm: 2,
         quant: 12,
         unit: 'kg',
+        price: 1.3,
         travel_history: {
             '06/06/2024': {
                 from: 'Austin',
@@ -102,9 +136,10 @@ export const products = {
     },
     '0x7': {
         class: 'spinach',
-        vendor: 3,
+        farm: 3,
         quant: 7,
         unit: 'kg',
+        price: 3.0,
         travel_history: {
             '06/07/2024': {
                 from: 'Boston',
@@ -118,9 +153,10 @@ export const products = {
     },
     '0x8': {
         class: 'pepper',
-        vendor: 4,
+        farm: 4,
         quant: 9,
         unit: 'kg',
+        price: 2.8,
         travel_history: {
             '06/08/2024': {
                 from: 'San Diego',
@@ -134,9 +170,10 @@ export const products = {
     },
     '0x9': {
         class: 'onion',
-        vendor: 2,
+        farm: 2,
         quant: 14,
         unit: 'kg',
+        price: 1.6,
         travel_history: {
             '06/01/2024': {
                 from: 'Houston',
@@ -150,9 +187,10 @@ export const products = {
     },
     '0xA': {
         class: 'tomato',
-        vendor: 3,
+        farm: 3,
         quant: 18,
         unit: 'kg',
+        price: 2.2,
         travel_history: {
             '06/02/2024': {
                 from: 'Phoenix',
@@ -166,9 +204,10 @@ export const products = {
     },
     '0xB': {
         class: 'potato',
-        vendor: 4,
+        farm: 4,
         quant: 22,
         unit: 'kg',
+        price: 0.9,
         travel_history: {
             '06/03/2024': {
                 from: 'Dallas',
@@ -182,9 +221,10 @@ export const products = {
     },
     '0xC': {
         class: 'carrot',
-        vendor: 1,
+        farm: 1,
         quant: 10,
         unit: 'kg',
+        price: 1.3,
         travel_history: {
             '06/04/2024': {
                 from: 'Seattle',
@@ -198,9 +238,10 @@ export const products = {
     },
     '0xD': {
         class: 'broccoli',
-        vendor: 2,
+        farm: 2,
         quant: 12,
         unit: 'kg',
+        price: 2.4,
         travel_history: {
             '06/01/2024': {
                 from: 'Tampa',
@@ -214,9 +255,10 @@ export const products = {
     },
     '0xE': {
         class: 'cabbage',
-        vendor: 3,
+        farm: 3,
         quant: 16,
         unit: 'kg',
+        price: 1.2,
         travel_history: {
             '06/06/2024': {
                 from: 'Denver',
@@ -230,9 +272,10 @@ export const products = {
     },
     '0xF': {
         class: 'spinach',
-        vendor: 4,
+        farm: 4,
         quant: 9,
         unit: 'kg',
+        price: 3.1,
         travel_history: {
             '06/07/2024': {
                 from: 'New York',
@@ -246,9 +289,10 @@ export const products = {
     },
     '0x10': {
         class: 'pepper',
-        vendor: 1,
+        farm: 1,
         quant: 11,
         unit: 'kg',
+        price: 2.7,
         travel_history: {
             '06/08/2024': {
                 from: 'San Jose',
@@ -262,9 +306,10 @@ export const products = {
     },
     '0x11': {
         class: 'onion',
-        vendor: 3,
+        farm: 3,
         quant: 20,
         unit: 'kg',
+        price: 1.7,
         travel_history: {
             '06/01/2024': {
                 from: 'Chicago',
@@ -278,9 +323,10 @@ export const products = {
     },
     '0x12': {
         class: 'tomato',
-        vendor: 4,
+        farm: 4,
         quant: 15,
         unit: 'kg',
+        price: 2.1,
         travel_history: {
             '06/02/2024': {
                 from: 'Miami',
@@ -294,9 +340,10 @@ export const products = {
     },
     '0x13': {
         class: 'potato',
-        vendor: 1,
+        farm: 1,
         quant: 25,
         unit: 'kg',
+        price: 0.75,
         travel_history: {
             '06/03/2024': {
                 from: 'Dallas',
@@ -310,9 +357,10 @@ export const products = {
     },
     '0x14': {
         class: 'carrot',
-        vendor: 2,
+        farm: 2,
         quant: 14,
         unit: 'kg',
+        price: 1.1,
         travel_history: {
             '06/04/2024': {
                 from: 'San Francisco',
@@ -326,9 +374,10 @@ export const products = {
     },
     '0x15': {
         class: 'broccoli',
-        vendor: 3,
+        farm: 3,
         quant: 20,
         unit: 'kg',
+        price: 2.6,
         travel_history: {
             '06/01/2024': {
                 from: 'Seattle',
@@ -342,9 +391,10 @@ export const products = {
     },
     '0x16': {
         class: 'cabbage',
-        vendor: 4,
+        farm: 4,
         quant: 18,
         unit: 'kg',
+        price: 1.4,
         travel_history: {
             '06/06/2024': {
                 from: 'Atlanta',
@@ -358,9 +408,10 @@ export const products = {
     },
     '0x17': {
         class: 'spinach',
-        vendor: 1,
+        farm: 1,
         quant: 11,
         unit: 'kg',
+        price: 2.9,
         travel_history: {
             '06/07/2024': {
                 from: 'Phoenix',
@@ -374,9 +425,10 @@ export const products = {
     },
     '0x18': {
         class: 'pepper',
-        vendor: 2,
+        farm: 2,
         quant: 10,
         unit: 'kg',
+        price: 2.75,
         travel_history: {
             '06/08/2024': {
                 from: 'Denver',
@@ -390,9 +442,10 @@ export const products = {
     },
     '0x19': {
         class: 'onion',
-        vendor: 4,
+        farm: 4,
         quant: 13,
         unit: 'kg',
+        price: 1.65,
         travel_history: {
             '06/01/2024': {
                 from: 'New York',
@@ -406,9 +459,10 @@ export const products = {
     },
     '0x1A': {
         class: 'tomato',
-        vendor: 1,
+        farm: 1,
         quant: 12,
         unit: 'kg',
+        price: 2.15,
         travel_history: {
             '06/02/2024': {
                 from: 'Chicago',
@@ -423,13 +477,14 @@ export const products = {
 };
 
 
-const productsByClass = {};
-Object.entries(products).forEach(([id, product]) => {
-    if (!productsByClass[product.class]) {
-        productsByClass[product.class] = [];
-    }
-    productsByClass[product.class].push(id);
-});
+
+// const productsByClass = {};
+// Object.entries(products).forEach(([id, product]) => {
+//     if (!productsByClass[product.class]) {
+//         productsByClass[product.class] = [];
+//     }
+//     productsByClass[product.class].push(id);
+// });
 
 export const ProductPage = () => {
     const [showHistory, setShowHistory] = useState({});
@@ -446,13 +501,11 @@ export const ProductPage = () => {
             const product = products[id];
             if (product.quant > 0) {
                 product.quant -= 1;
-                if (id in cart) {
-                    cart[id] += 1;
-                } else {
-                    cart[id] = 1;
-                }
+                Cart.addItem(id, 1);
             }
         }
+        toggleShowHistory(0);
+        toggleShowHistory(0);
     };
 
     return (
